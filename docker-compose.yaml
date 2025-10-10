@@ -12,6 +12,7 @@ services:
 
   #Builds the frontend Docker image and creates the frontend microservice
   monica-yolo-client:
+  # versioning through semver conventioning
     image: monicamwangi/yolo-client:v1.0.0
     build: ./client
     container_name: monica-yolo-client
@@ -26,6 +27,7 @@ services:
 
   #Builds the backend Docker image and creates the backend microservice
   monica-yolo-backend:
+    # versioning through semver conventioning
     image: monicamwangi/yolo-backend:v1.0.0
     build: ./backend
     container_name: monica-yolo-backend
@@ -34,6 +36,7 @@ services:
     restart: always
     ports:
       - "5000:5000"
+      #added an environment for the mongo db 
     environment:
       - MONGO_URI=mongodb+srv://mwangimonica123_db_user:Njeri41396019!@clusterip.k56ypyq.mongodb.net/?retryWrites=true&w=majority&appName=ClusterIP
     depends_on: 
