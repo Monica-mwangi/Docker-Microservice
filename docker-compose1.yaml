@@ -70,4 +70,5 @@ networks:
 #Creates a Docker volume that persists all the data stored in the database
 volumes:
   app-mongo-data:
+  # It’s where MongoDB’s data will be stored permanently, even if the container is deleted.
     driver: local
