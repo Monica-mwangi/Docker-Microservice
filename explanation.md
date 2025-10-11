@@ -40,3 +40,11 @@ Tested containers with docker-compose up.
 installed dotenv to ensure that server.js runs well and mongodb connected succesfully
 did some few console.logs
 Visited http://localhost:5000/api/products to ensure the products I was adding were there and visible 
+
+# 7. Image tagging 
+Good Practices
+
+Followed Docker image naming (semver) naming standards:
+monicamwangi/yolo-backend:v1.0.0
+monicamwangi/yolo-client:v1.0.0
+Used .dockerignore to exclude node_modules and logs for smaller builds.
