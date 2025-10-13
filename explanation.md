@@ -48,3 +48,16 @@ Followed Docker image naming (semver) naming standards:
 monicamwangi/yolo-backend:v1.0.0
 monicamwangi/yolo-client:v1.0.0
 Used .dockerignore to exclude node_modules and logs for smaller builds.
+
+## Docker Hub Image Versions
+
+Both the backend and frontend images were successfully built and pushed to Docker Hub.
+
+- **Backend Image:** monica8531/yolo-backend:v1.0.0  
+- **Frontend Image:** monica8531/yolo-client:v1.0.0  
+
+![Docker Hub Screenshot](./images/yolo-backend-Docker-Hub.png)
+**Client Image:**
+![Yolo Client Docker Hub](./images/yolo-client-Docker-Hub.png)
+
+
