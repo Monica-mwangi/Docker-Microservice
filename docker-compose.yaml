@@ -38,7 +38,7 @@ services:
       - "5000:5000"
       #added an environment for the mongo db 
     environment:
-      - MONGO_URI=mongodb+srv://mwangimonica123_db_user:Njeri41396019!@clusterip.k56ypyq.mongodb.net/?retryWrites=true&w=majority&appName=ClusterIP
+      - MONGODB_URI=mongodb://root:example@app-mongo:27017/yolomy?authSource=admin
     depends_on: 
       - app-mongo
     networks:
@@ -48,6 +48,10 @@ services:
   app-mongo:
     image: mongo
     container_name: app-mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: yolomy
     ports:
       - "27017:27017"
     networks:
