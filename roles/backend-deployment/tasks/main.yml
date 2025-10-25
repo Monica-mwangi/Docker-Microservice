@@ -1,16 +1,39 @@
 ---
-- name: Pull image from repository
-  docker_image:
-    name: brianbwire/brian-yolo-backend:v1.0.0
-    source: pull
-
-- name: Create Node.js Backend Container
-  docker_container:
-    name: brian-yolo-backend
-    image: brianbwire/brian-yolo-backend:v1.0.0
-    networks:
-      - name: app-net
-    ports:
-      - "5000:5000"
-    command: "npm start"
+- name: Ensure Docker is installed and running
   become: yes
+  block:
+
+    - name: Ensure Docker service is started and enabled
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Wait for Docker to be ready
+      shell: docker info
+      register: docker_ready
+      retries: 5
+      delay: 3
+      until: docker_ready.rc == 0
+
+    - name: Pull backend Docker image
+      docker_image:
+        name: monica8531/yolo-backend
+        tag: v1.0.0
+        source: pull
+
+    - name: Create Docker network
+      community.docker.docker_network:
+        name: yolo-network
+        state: present
+
+    - name: Run Node.js Backend container
+      docker_container:
+        name: yolo-backend
+        image: monica8531/yolo-backend:v1.0.0
+        networks:
+          - name: yolo-network
+        ports:
+          - "5000:5000"
+        command: "npm start"
+        restart_policy: always
