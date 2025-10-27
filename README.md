@@ -309,8 +309,10 @@ backend-deployment – Pulls/builds and runs the backend Node.js container.
 setup-mongodb - Sets up Mongodb.
 docker-install - Installs Docker to the VM.
 Vagrant Provision
+This will give the connectivity to the virtual machine. In case of any error, You'll be able to provision while debugging until all goes successful
+
 The client  is running on port 3001  and backend 5001 due to port forwarding.
-This will give the connectivity to the virtual machine. In case of any error, You'll be able to provision while debugging until all goes successful! Screenshot from 2025-07-29 12-20-36
+
 
 ## Author
 
