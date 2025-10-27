@@ -222,8 +222,8 @@ docker-compose down
 
 | Service | Image | Tag |
 |----------|--------|-----|
-| Backend | `joyrose/yolo-backend` | `1.0.0` |
-| Frontend | `joyrose/yolo-frontend` | `1.0.0` |
+| Backend | `monica8531/yolo-backend:v1.0.0   ` | `1.0.0` |
+| Frontend | `monica8531/yolo-client:v1.0.0    ` | `1.0.0` |
 
 Both images are available on DockerHub and ready for use in CI/CD pipelines.
 
@@ -261,12 +261,12 @@ First, access the repository where you'll be working from.
 Clone the repository
 
 cd yolo-ecommerce-deployment to the working repository.
-"git clone https://github.com/KenanRicky/docker-compose-project.git"
+"git clone https://github.com/Monica-mwangi/Docker-Microservice.git"
 Boot and Provision the VM
 
 Create a vagrant Environment from a Vagrant Box.
-In this case, I am using Ubuntu/jammy64 image.
-"vagrant box add Ubuntu/jammy64".
+In this case, I am using  Jeff Geerlings ubuntu 20.04 image.
+"vagrant box add  Jeff Geerlings ubuntu 20.04".
 Run vagrant box list to confirm if the box exists in your VM list.
 Use "vagrant init" to create the environment
 "Vagrant Up" to start up the Virtual Machine.
@@ -309,7 +309,7 @@ backend-deployment – Pulls/builds and runs the backend Node.js container.
 setup-mongodb - Sets up Mongodb.
 docker-install - Installs Docker to the VM.
 Vagrant Provision
-
+The client  is running on port 3001  and backend 5001 due to port forwarding.
 This will give the connectivity to the virtual machine. In case of any error, You'll be able to provision while debugging until all goes successful! Screenshot from 2025-07-29 12-20-36
 
 ## Author
