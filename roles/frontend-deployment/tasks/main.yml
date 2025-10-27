@@ -1,0 +1,21 @@
+- name: Remove existing frontend container if any
+  docker_container:
+    name: frontend_container
+    state: absent
+    force_kill: yes
+
+- name: Run frontend container
+  docker_container:
+    name: frontend_container
+    image: monica8531/yolo-client:v1.0.0
+    state: started
+    restart_policy: unless-stopped
+    ports:
+      - "3000:3000"
+    env:
+      CI: "true"
+      FAST_REFRESH: "false"
+      REACT_APP_API_URL: "http://yolo-backend:5000"
+    command: "npm start -- --host 0.0.0.0 --port 3000"
+    networks:
+      - name: yolo-network

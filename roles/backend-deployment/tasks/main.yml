@@ -1,7 +1,12 @@
----
 - name: Ensure Docker is installed and running
   become: yes
   block:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
 
     - name: Ensure Docker service is started and enabled
       service:
@@ -35,5 +40,5 @@
           - name: yolo-network
         ports:
           - "5000:5000"
-        command: "npm start"
+        command: "node server.js"   
         restart_policy: always

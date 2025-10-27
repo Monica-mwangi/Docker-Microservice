@@ -75,4 +75,21 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+
+  # Forward ports for backend and frontend
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+
+  # ✅ Forward ports for backend and frontend
+  config.vm.network "forwarded_port", guest: 5000, host: 5001  # Backend
+  config.vm.network "forwarded_port", guest: 3000, host: 3001  # Frontend
+
+  # ✅ Provisioning with Ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yaml"
+    ansible.verbose = "vv"
+  end
 end
+

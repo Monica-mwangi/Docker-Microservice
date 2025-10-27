@@ -1,0 +1,8 @@
+---
+
+
+frontend_container_name: monica-yolo-client
+frontend_image: monica8531/yolo-client:v1.0.0
+frontend_port: "3000:3000"
+frontend_network: yolo-network
+frontend_volume: ./app-mongo-data:/data/db

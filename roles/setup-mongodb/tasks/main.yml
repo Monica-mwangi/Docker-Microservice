@@ -4,11 +4,11 @@
     name: app-mongo
     image: mongo
     ports:
-      - '27017:27017'
+      - "27017:27017"
     volumes:
       - ./app-mongo-data:/data/db
     networks:
-      - name: app-net
+      - name: yolo-network
   tags:
     - database
     - backend
