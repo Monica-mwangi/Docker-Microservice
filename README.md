@@ -316,16 +316,16 @@ The client  is running on port 3001  and backend 5001 due to port forwarding.
 
 
 
-Orchestration with Kubernetes
+**Orchestration with Kubernetes**
 Create a Project
 
-Create a project in the GKE and name the project.
+**Create a project in the GKE and name the project.**
 Create Cluster
 
-Then Create a cluster with the appropriate particulars for the project
+**Then Create a cluster with the appropriate particulars for the project**
 Clone the REpository
 
-To clone the repository, first, you have to actvate the terminal to enable you interract with the system. From the github account clone the forked repository using the termial activated.
+**To clone the repository, first, you have to actvate the terminal to enable you interract with the system. From the github account clone the forked repository using the termial activa**ted.
 Adding the Kubernetes Files
 
 After confirming that the repository has been cloned, Open the code editor to enable you add files. Access the correct directory and Create a folder called manifest where all the .yaml files for kubernetes will created.
@@ -344,7 +344,7 @@ Add the changes to the github
 After confirmation that all is well, then add the changes to the github with good tracking.
 
 
-problems faced 
+**problems faced **
     Backend pods in CrashLoopBackOff status
      Containers starting then immediately crashing
 
