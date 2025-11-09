@@ -1,16 +1,35 @@
-FROM node:18-alpine AS build
+# Build stage
+FROM node:16-alpine as build
 
 WORKDIR /app
 
-ENV NODE_OPTIONS=--openssl-legacy-provider
-
+# Copy package files
 COPY package*.json ./
-RUN npm install
 
+# Install dependencies
+RUN npm ci
+
+# Install serve globally
+RUN npm install serve
+
+# Copy source code
 COPY . .
+
+# Build the React app
 RUN npm run build
 
-FROM nginx:alpine
-COPY --from=build /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# Production stage
+FROM node:16-alpine
+
+WORKDIR /app
+
+
+
+# Copy built app from build stage
+COPY --from=build /app/build ./build
+
+# Expose port
+EXPOSE 3000
+
+# Serve the app
+CMD ["serve", "-s", "build", "-l", "3000"]
