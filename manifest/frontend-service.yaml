@@ -7,38 +7,6 @@ spec:
   selector:
     app: frontend
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: 80
+      targetPort: 3000
       nodePort: 30000
----
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: frontend
-spec:
-  serviceName: "frontend-service"
-  replicas: 1
-  selector:
-    matchLabels:
-      app: frontend
-  template:
-    metadata:
-      labels:
-        app: frontend
-    spec:
-      containers:
-        - name: monica-yolo-client
-          image: monica8531/yolo-client:v1.0.0
-          ports:
-            - containerPort: 3000
-          volumeMounts:
-            - name: frontend-storage
-              mountPath: /usr/src/app/data
-  volumeClaimTemplates:
-    - metadata:
-        name: frontend-storage
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi

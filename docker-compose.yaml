@@ -28,7 +28,7 @@ services:
   #Builds the backend Docker image and creates the backend microservice
   monica-yolo-backend:
     # versioning through semver conventioning
-    image: monicamwangi/yolo-backend:v1.0.0
+    image: monica8531/yolo-backend:v1.0.0
     build: ./backend
     container_name: monica-yolo-backend
     stdin_open: true

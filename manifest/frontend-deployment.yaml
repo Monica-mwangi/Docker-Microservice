@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
@@ -14,6 +15,8 @@ spec:
       containers:
       - name: monica-yolo-client
         image: monica8531/yolo-client:v1.0.0
-       
         ports:
-        - containerPort: 5000 
+        - containerPort: 3000
+        imagePullPolicy: Always
+        command: ["/bin/sh"]
+        args: ["-c", "cd /app && npm run build && npx serve -s build -l 3000"]

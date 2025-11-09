@@ -9,27 +9,29 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci
 
-# Install serve globally
-RUN npm install serve
-
 # Copy source code
 COPY . .
 
-# Build the React app
+# Build the React app - THIS MUST SUCCEED
 RUN npm run build
+
+# Verify build was created
+RUN ls -la build/ || echo "Build failed!"
 
 # Production stage
 FROM node:16-alpine
 
 WORKDIR /app
 
+# Install serve globally
+RUN npm install -g serve
 
-
-# Copy built app from build stage
+# Copy built app from build stage - THIS MUST WORK
 COPY --from=build /app/build ./build
 
-# Expose port
+# Verify build files are copied
+RUN ls -la build/ || echo "No build files copied!"
+
 EXPOSE 3000
 
-# Serve the app
 CMD ["serve", "-s", "build", "-l", "3000"]

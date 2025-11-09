@@ -15,14 +15,10 @@ spec:
         app: backend
     spec:
       containers:
-        - name: yolo-backend
+        - name: monica-yolo-backend
           image: monica8531/yolo-backend:v1.0.0
           command: ["npm", "start"] 
           ports:
             - containerPort: 5000
-
-
-
-
-
+          imagePullPolicy: Always
 
