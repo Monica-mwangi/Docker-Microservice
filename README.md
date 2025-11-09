@@ -319,10 +319,10 @@ The client  is running on port 3001  and backend 5001 due to port forwarding.
 **Orchestration with Kubernetes**
 Create a Project
 
-**Create a project in the GKE and name the project.**
+Create a project in the GKE and name the project.
 Create Cluster
 
-**Then Create a cluster with the appropriate particulars for the project**
+hen Create a cluster with the appropriate particulars for the project**
 Clone the REpository
 
 **To clone the repository, first, you have to actvate the terminal to enable you interract with the system. From the github account clone the forked repository using the termial activa**ted.
