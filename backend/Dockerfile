@@ -1,23 +1,23 @@
-FROM node:18-alpine AS build
-
-WORKDIR /usr/src/app
-
-COPY package*.json ./
-RUN npm install
-
-COPY . .
-
-FROM alpine:3.18
+FROM node:18-alpine
 
 WORKDIR /app
 
-RUN apk add --no-cache nodejs
+# Copy package files
+COPY package*.json ./
 
-COPY --from=build /usr/src/app /app
+# Install dependencies
+RUN npm install --only=production
 
-ENV NODE_ENV=production
-ENV PORT=5000
+# Copy source code
+COPY . .
+
+# Create non-root user for security
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nextjs -u 1001 && \
+    chown -R nextjs:nodejs /app
+USER nextjs
 
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+# Start the application
+CMD ["npm", "start"]
