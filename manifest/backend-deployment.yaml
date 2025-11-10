@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: backend
   labels:
     app: backend
 spec:
@@ -17,8 +17,7 @@ spec:
       containers:
         - name: monica-yolo-backend
           image: monica8531/yolo-backend:v1.0.0
+          imagePullPolicy: Never  # ← CRITICAL: Use local image only
           command: ["npm", "start"] 
           ports:
             - containerPort: 5000
-          imagePullPolicy: Always
-
