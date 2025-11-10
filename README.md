@@ -316,39 +316,87 @@ The client  is running on port 3001  and backend 5001 due to port forwarding.
 
 
 
-**Orchestration with Kubernetes**
-Create a Project
+# **Orchestration with Kubernetes**
 
-Create a project in the GKE and name the project.
-Create Cluster
+## **1. Create a Project**
+- Create a project in **Google Kubernetes Engine (GKE)** and give it a suitable name.
 
-hen Create a cluster with the appropriate particulars for the project**
-Clone the REpository
+---
 
-**To clone the repository, first, you have to actvate the terminal to enable you interract with the system. From the github account clone the forked repository using the termial activa**ted.
-Adding the Kubernetes Files
+## **2. Create a Cluster**
+- Create a **cluster** with the appropriate configurations for your project.
 
-After confirming that the repository has been cloned, Open the code editor to enable you add files. Access the correct directory and Create a folder called manifest where all the .yaml files for kubernetes will created.
-Adding Deployment files
+---
 
-In the manifest folder create both the frontend and backend deployment files. The files shoud have the core parts well defined. The core parts includes; 1.kind 2. metadata 3. spec 4.status.
+## **3. Clone the Repository**
+- Open your **terminal** to interact with the system.
+- From your **GitHub account**, clone the forked repository using the terminal command:
 
-After adding the deployment files then apply to make them effective in the cluster. the confirm if the cluster content is having the nodes and pods well created and running.
-Adding Service Files
+```bash
+git clone <your-repository-url>
 
-In the manifest folder create both the frontend and backend service files. The purpose of the service is to expose the applications as a network service by giving stable IP addresses.
-Adding statefulSet
+    Once cloned, navigate into the project directory.
 
-In the manifest folder create both the frontend and backend statefulset files. StatefulSet helps in the management of the stateful applications that require stable persistent storage like databases.
-Add the changes to the github
-After confirmation that all is well, then add the changes to the github with good tracking.
+4. Adding the Kubernetes Files
 
+    Open your project in your code editor.
 
-**problems faced **
+    Inside the project directory, create a folder named manifest.
+
+    All Kubernetes .yaml files will be stored inside this folder.
+
+5. Adding Deployment Files
+
+    Inside the manifest folder, create both frontend and backend deployment files.
+
+    Each deployment file should include the core sections:
+
+        kind
+
+        metadata
+
+        spec
+
+        status
+
+    After adding the deployment files, apply them to the cluster:
+
+kubectl apply -f manifest/
+
+    Then confirm that the cluster has the nodes and pods running properly:
+
+kubectl get pods
+kubectl get nodes
+
+6. Adding Service Files
+
+    In the manifest folder, create both frontend and backend service files.
+
+    The purpose of a Service is to expose the applications as a network service with a stable IP address.
+
+7. Adding StatefulSet
+
+    In the manifest folder, create both frontend and backend StatefulSet files.
+
+    A StatefulSet manages stateful applications that require stable, persistent storage (e.g., databases).
+
+8. Add Changes to GitHub
+
+    After confirming that everything works correctly, commit and push the changes to GitHub:
+
+git add .
+git commit -m "Added Kubernetes manifests for deployments, services, and StatefulSets"
+git push origin main
+
+Problems Faced
+
     Backend pods in CrashLoopBackOff status
-     Containers starting then immediately crashing
+
+    Containers starting and immediately crashing
 
 Confirmations
+
+    Ensure all pods, services, and nodes are running properly by executing:
 
 
 
