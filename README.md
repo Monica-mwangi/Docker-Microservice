@@ -379,6 +379,141 @@ kubectl get nodes
     In the manifest folder, create both frontend and backend StatefulSet files.
 
     A StatefulSet manages stateful applications that require stable, persistent storage (e.g., databases).
+    
+
+### MongoDB StatefulSet Features:
+- **Stable Pod Identity**: Pod named `mongodb-0` (not random)
+- **Persistent Storage**: 1GB volume that survives pod restarts
+- **Headless Service**: `mongodb-service` for direct pod access
+- **Ordered Deployment**: Pods start/stop in sequence
+
+### Kubernetes Resources:
+```bash
+# View StatefulSet
+kubectl get statefulset
+
+# View Persistent Volume Claims
+kubectl get pvc
+  my output 
+  michelle@michelle-HP-Notebook:~/DEVOPS/week4/yolo/manifest$ # Get complete status
+kubectl get all,pvc
+
+# Should show:
+# - deployment.apps/frontend
+# - deployment.apps/backend  
+# - statefulset.apps/mongodb
+# - persistentvolumeclaim/mongo-data-mongodb-0
+NAME                            READY   STATUS    RESTARTS   AGE
+pod/backend-5b5849d7fc-s9cqb    1/1     Running   0          6m22s
+pod/frontend-59fff6ff4f-m7bs5   1/1     Running   0          31m
+pod/mongodb-0                   1/1     Running   0          6m6s
+
+NAME                       TYPE           CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/app-mongo          ClusterIP      10.102.185.47   <none>        27017/TCP        31m
+service/backend-service    LoadBalancer   10.98.55.90     <pending>     5000:30100/TCP   31m
+service/frontend-service   LoadBalancer   10.96.111.183   <pending>     80:30000/TCP     31m
+service/kubernetes         ClusterIP      10.96.0.1       <none>        443/TCP          34h
+service/mongodb-service    ClusterIP      None            <none>        27017/TCP        6m6s
+
+NAME                       READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/backend    1/1     1            1           31m
+deployment.apps/frontend   1/1     1            1           31m
+
+NAME                                  DESIRED   CURRENT   READY   AGE
+replicaset.apps/backend-58b85dd65     0         0         0       31m
+replicaset.apps/backend-5b5849d7fc    1         1         1       6m22s
+replicaset.apps/frontend-59fff6ff4f   1         1         1       31m
+
+NAME                       READY   AGE
+statefulset.apps/mongodb   1/1     6m6s
+
+NAME                                         STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+persistentvolumeclaim/mongo-data-mongodb-0   Bound    pvc-f36db28b-49ee-407e-b393-28d3b62cb082   1Gi        RWO            standard       <unset>                 6m6s
+
+
+# View specific StatefulSet pod
+kubectl get pod mongodb-0
+
+# Deploy everything with one command
+kubectl apply -f manifest/
+
+# Access the application
+minikube service frontend-service
+
+What's Included
+
+    Frontend: React app
+
+    Backend: Node.js API with MongoDB
+
+    Database: MongoDB for data storage
+
+Application URLs
+
+    Frontend: http://192.168.49.2:30000
+
+    Backend API: http://192.168.49.2:30100
+
+API Endpoints
+bash
+
+# Test the products API
+curl http://192.168.49.2:30100/api/products
+# Returns: [] (empty array - no products added yet)
+
+Docker Images
+
+    Frontend: monica8531/yolo-client:v2.0.0
+
+    Backend: monica8531/yolo-backend:v2.0.0
+
+
+Problems I Fixed
+Frontend Issues
+
+    Before: Containers crashed, slow startup (1-2 minutes)
+
+    After: Fast deployment (10-15 seconds), no crashes
+
+    Fix: Multi-stage Docker build with pre-built React app
+
+Backend Issues
+
+    Before: "npm not found" errors, MongoDB connection failed
+
+    After: Proper Node.js runtime, database connected successfully
+
+    Fix: Correct Docker base image and service configuration
+
+Kubernetes Issues
+
+    Before: Conflicting deployments, services not working
+
+    After: Clean architecture, all services accessible
+
+    Fix: Proper resource definitions and service discovery
+
+Technical Improvements
+
+    Multi-stage Docker builds for smaller images
+
+    MongoDB integration with proper connection
+
+    Health checks and resource limits
+
+    Fast, reliable deployments
+
+Verification
+bash
+
+# Check everything is running
+kubectl get all
+
+# Test backend connection
+kubectl logs -l app=backend
+
+# Test frontend
+minikube service frontend-service
 
 8. Add Changes to GitHub
 
@@ -396,8 +531,19 @@ Problems Faced
 
 Confirmations
 
-    Ensure all pods, services, and nodes are running properly by executing:
+Ensure all pods, services, and nodes are running properly by executing:
+# Check everything is running
+kubectl get all
 
+# Test backend connection
+kubectl logs -l app=backend
+
+# Test frontend
+minikube service frontend-service
+
+# Deployed my application in aws
+here is my live link
+http://af85d9728716843eeb37a434324882f1-222597138.us-east-1.elb.amazonaws.com/
 
 
 ## Author
